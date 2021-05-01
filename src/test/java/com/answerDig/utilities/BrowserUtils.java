@@ -1,4 +1,4 @@
-package com.task.utilities;
+package com.answerDig.utilities;
 
 import org.junit.Assert;
 import org.openqa.selenium.*;
@@ -15,6 +15,7 @@ public class BrowserUtils {
 
     /**
      * Switches to new window by the exact title. Returns to original window if target title not found
+     *
      * @param targetTitle
      */
     public static void switchToWindow(String targetTitle) {
@@ -36,6 +37,7 @@ public class BrowserUtils {
     public static void hover(WebElement element) {
         Actions actions = new Actions(Driver.get());
         actions.moveToElement(element).perform();
+
     }
 
     /**
@@ -271,6 +273,7 @@ public class BrowserUtils {
 
     /**
      * Highlighs an element by changing its background and border color
+     *
      * @param element
      */
     public static void highlight(WebElement element) {
@@ -366,8 +369,9 @@ public class BrowserUtils {
     }
 
     /**
-     *  checks that an element is present on the DOM of a page. This does not
-     *    * necessarily mean that the element is visible.
+     * checks that an element is present on the DOM of a page. This does not
+     * * necessarily mean that the element is visible.
+     *
      * @param by
      * @param time
      */
@@ -375,6 +379,18 @@ public class BrowserUtils {
         new WebDriverWait(Driver.get(), time).until(ExpectedConditions.presenceOfElementLocated(by));
     }
 
+    public static void hoverOverWithJS(WebElement a) {
+
+        String mouseOverScript = "if(document.createEvent){var evObj = document.createEvent('MouseEvents');evObj.initEvent('mouseover',true, false); arguments[0].dispatchEvent(evObj);} else if(document.createEventObject) { arguments[0].fireEvent('onmouseover');}";
+        ((JavascriptExecutor) Driver.get()).executeScript(mouseOverScript, a);
+
+
+    }
+
+
+    public static void dragAndDrop(WebElement webElement, WebElement target){
+        new Actions(Driver.get()).dragAndDrop(webElement,target).perform();
+    }
 
 
 }

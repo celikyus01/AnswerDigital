@@ -1,6 +1,7 @@
-package com.task.step_definitions;
+package com.answerDig.step_definitions;
 
-import com.task.utilities.Driver;
+import com.answerDig.utilities.BrowserUtils;
+import com.answerDig.utilities.Driver;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
@@ -11,18 +12,21 @@ import java.util.concurrent.TimeUnit;
 
 public class Hooks {
 
-    // select secound before whoch is bbelongs to cucumber
+
+
     @Before
     public void setUp(){
-        Driver.get().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+       // Driver.get().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        Driver.get().manage().window().maximize();
+
     }
     @After
-    public void tearDown(Scenario scenario) throws InterruptedException {
+    public void tearDown(Scenario scenario) {
         if(scenario.isFailed()) {
             final byte[] screenshot = ((TakesScreenshot) Driver.get()).getScreenshotAs(OutputType.BYTES);
             scenario.attach(screenshot, "image.png", "screenshot");
         }
-        //Thread.sleep(5000);
+        //BrowserUtils.waitFor(1);
         Driver.closeDriver();
     }
 

@@ -1,4 +1,4 @@
-package com.task.utilities;
+package com.answerDig.utilities;
 
 import java.io.FileInputStream;
 import java.util.Properties;
