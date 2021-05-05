@@ -29,11 +29,10 @@ https://www.linkedin.com/in/yusuf-celik-8a12b2208
  
  
 #### QA:
- 
-Write a Cucumber BDD test that users can register in the ‘Student Registration Form’.
 
+Generating test scenarios and automation framework for Student Registration Form and completing other tasks given.
  
-  
+ 
  
 #### System Requirements:
  
