@@ -8,7 +8,8 @@
 *QA Test Automation Engineer*
  
   
-[celikyus01@gmail.com]
+celikyus01@gmail.com
+
 https://www.linkedin.com/in/yusuf-celik-8a12b2208
 
  
