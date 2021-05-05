@@ -12,8 +12,8 @@ import org.junit.runner.RunWith;
                 "rerun:target/rerun.txt"},
         features = "src/test/resources/features/",
         glue = "com/answerDig/step_definitions",
-        dryRun = false
-       // tags = "@date"
+        dryRun = false,
+        tags = "@register_invalid_email"
 
 )
 public class CukesRunner {

@@ -46,16 +46,14 @@ public class StudentRegisterPage extends BasePage{
 
 
 
-    public void fillInAForm(String firstNameStr, String lastNameStr, String emailStr, String mobileStr, String subjectsStr, String currentAddressStr, String dateOfBirth) {
+    public void fillInAForm(String firstNameStr, String lastNameStr, String emailStr, String mobileStr, String currentAddressStr, String dateOfBirth) {
         firstName.sendKeys(firstNameStr);
         lastName.sendKeys(lastNameStr);
         email.sendKeys(emailStr);
         mobileNumber.sendKeys(mobileStr);
-        subjects.sendKeys(subjectsStr);
         currentAddress.sendKeys(currentAddressStr);
         //new Actions(Driver.get()).moveToElement(dateOfBirthInput).doubleClick().click().sendKeys(Keys.DELETE).perform();
-
-//        dateOfBirthInput.clear();
+        //dateOfBirthInput.clear();
         //dateOfBirthInput.sendKeys(dateOfBirth);
 
 

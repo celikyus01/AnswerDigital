@@ -1,4 +1,4 @@
-@dad
+@dad @all
 Feature: Drag and Drop
 
   Scenario: Drag and Drop verify location is chaanged

@@ -13,6 +13,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import java.io.FileNotFoundException;
@@ -88,9 +89,7 @@ public class StudentRegisterStepDefs {
         this.firstname = faker.name().firstName();
         this.lastName = faker.name().lastName();
         this.email = firstname + "." + lastName + "@gamil.com";
-        //String phoneNumber = faker.phoneNumber().phoneNumber().toString().replace(".", "").replace("-", "").replace(" ", "").replace("(", "").replace(")", "");
         this.phoneNumber = "1234567890";
-        this.description = faker.random().hex(130);
         this.address = faker.address().fullAddress();
         LocalDateTime dateOfBirth = LocalDateTime.now().minusYears(new Random().nextInt(40) + 10);
         this.dateOfBirthString = formatter.format(dateOfBirth);
@@ -100,9 +99,23 @@ public class StudentRegisterStepDefs {
                 this.lastName,
                 this.email,
                 this.phoneNumber,
-                this.description,
                 this.address,
                 this.dateOfBirthString.toString());
+
+    }
+
+
+    @When("the user selects below subjects")
+    public void the_user_selects_below_subjects(List<String> subjects) {
+
+        //subjects.stream().peek(x-> new StudentRegisterPage().subjects.sendKeys(x, Keys.ENTER));
+
+        for (String subject : subjects) {
+            new StudentRegisterPage().subjects.sendKeys(subject);
+            new StudentRegisterPage().subjects.sendKeys(Keys.ENTER);
+        }
+
+
 
     }
 
@@ -115,6 +128,7 @@ public class StudentRegisterStepDefs {
             this.hobbies.add(value);
         }
         new StudentRegisterPage().checkRadioButton(value);
+
 
     }
 

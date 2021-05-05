@@ -1,4 +1,4 @@
-@date
+@date @all
 Feature: Date
 
   Scenario: Set Date 1 mounth future

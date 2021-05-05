@@ -1,4 +1,4 @@
-@modal
+@modal @all
 Feature: Alert
 
   Scenario: Accept Alert and verify alert is disappeared
