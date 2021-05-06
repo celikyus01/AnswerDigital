@@ -1,6 +1,4 @@
 .idea
 target/
 AnswerDigital.iml
-
-
-
+/src/test/java/com/answerDig/practice/

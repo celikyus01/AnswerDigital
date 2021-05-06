@@ -6,16 +6,15 @@ import com.answerDig.utilities.BrowserUtils;
 import com.answerDig.utilities.ConfigurationReader;
 import com.answerDig.utilities.Driver;
 import com.github.javafaker.Faker;
+import io.cucumber.core.gherkin.Step;
 import io.cucumber.java.Scenario;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+
 import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -27,49 +26,19 @@ import java.util.stream.Collectors;
 public class StudentRegisterStepDefs {
 
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
-    DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd MM yyyy");
-    DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    DateTimeFormatter formatter3 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-    DateTimeFormatter formatter4 = DateTimeFormatter.ofPattern("MMMM d, yyyy h:mm a");
 
     private String firstname;
     private String lastName;
-
-
-    //private static String studentName= firstname+" "+lastName;
     private String email;
     private String gender;
     private String phoneNumber;
     private String dateOfBirthString;
-    private String description;
+    private String description = "";
     private final List<String> hobbies = new ArrayList<>();
     private final String picture = null;
     private String address;
     private String state;
     private String city;
-    private static String actual_select_date;
-    private static String actual_date_and_time;
-    private static String expected_select_date;
-    private static String expected_date_and_time;
-
-    public String getActual_select_date() {
-        return actual_select_date;
-    }
-
-    public String getActual_date_and_time() {
-        return actual_date_and_time;
-    }
-
-    public String getExpected_select_date() {
-        return expected_select_date;
-    }
-
-    public String getExpected_date_and_time() {
-        return expected_date_and_time;
-    }
-
-
-
 
 
     @Given("the user is in the main page")
@@ -108,13 +77,15 @@ public class StudentRegisterStepDefs {
     @When("the user selects below subjects")
     public void the_user_selects_below_subjects(List<String> subjects) {
 
-        //subjects.stream().peek(x-> new StudentRegisterPage().subjects.sendKeys(x, Keys.ENTER));
+        String dummy = "";
 
         for (String subject : subjects) {
             new StudentRegisterPage().subjects.sendKeys(subject);
             new StudentRegisterPage().subjects.sendKeys(Keys.ENTER);
-        }
 
+            dummy = dummy.concat(subject + ", "); // this is a string manupulation to be used for further assertions
+        }
+        this.description = dummy.substring(0, dummy.length() - 2);  // this is a string manupulation to be used for further assertions
 
 
     }
@@ -145,16 +116,6 @@ public class StudentRegisterStepDefs {
 
     }
 
-    @When("the user uploades {string} file")
-    public void the_user_uploades_file(String fileName) {
-
-//        String filePathUnderResources = new StudentRegisterPage().getFilePathUnderResources(fileName);
-//        Driver.get().findElement(By.xpath("//input[@id='uploadPicture']")).click();
-//        Driver.get().findElement(By.xpath("//input[@id='uploadPicture']")).sendKeys(filePathUnderResources, Keys.ENTER);
-
-
-    }
-
     @When("the student clicks on {string} button")
     public void the_student_clicks_on_button(String buttonName) {
 
@@ -178,38 +139,25 @@ public class StudentRegisterStepDefs {
 
         String hobbyListDetached = this.hobbies.toString().replace("[", "").replace("]", "").replace(",", "").replace(" ", "");
 
-//        LocalDateTime expectedDate = LocalDateTime.parse(this.dateOfBirthString, formatter2);
-//        LocalDateTime actualDate = LocalDateTime.parse(elements.get(4).getText().replace(",", " "), formatter2);
-
 
         Assert.assertEquals(this.firstname + " " + this.lastName, elements.get(0).getText());
         Assert.assertEquals(this.email, elements.get(1).getText());
         Assert.assertEquals(this.gender, elements.get(2).getText());
         Assert.assertEquals(this.phoneNumber, elements.get(3).getText());
-        //Assert.assertEquals(this.dateOfBirthString,elements.get(4).getText().replace(","," "));
-        //Assert.assertEquals(expectedDate,actualDate);
-
-        //DATE ASSERTIONS
-        String expectedDate = this.dateOfBirthString.toString();
-        String actualDate = elements.get(4).getText().replace(",", " ");
-
-        System.out.println("actualDate = " + actualDate);
-        System.out.println("expectedDate = " + expectedDate);
-
-        //    **** BUG FOUND: when date field is deleted, application is crashing
-        //        Assert.assertEquals(expectedDate.substring(0,2),
-        //                actualDate.substring(0,2));
-        //        Assert.assertTrue(this.dateOfBirthString.toString().substring(this.dateOfBirthString.toString().length()-3).
-        //                equals(elements.get(4).getText().replace(","," ").substring(elements.get(4).getText().replace(","," ").length()-3)));
-
-        //   **** BUG FOUND: it doesn't log the subjects data in database
-        //Assert.assertEquals(this.description,elements.get(5).getText());
+        Assert.assertEquals(this.description, elements.get(5).getText());
         Assert.assertEquals(hobbyListDetached, elements.get(6).getText().replace(",", "").replace(" ", ""));
-        Assert.assertEquals(this.picture, null);
+        // Assert.assertEquals(this.picture, null);
         Assert.assertEquals(this.address, elements.get(8).getText());
         Assert.assertEquals(this.state + " " + this.city, elements.get(9).getText());
 
+//      DATE ASSERTIONS: BUG!!! -- Since data field is impossible to clear, this field could NOT be asserted
+        String expectedDate = this.dateOfBirthString.toString();
+        String actualDate = elements.get(4).getText().replace(",", " ");
+//        LocalDateTime expectedDate = LocalDateTime.parse(this.dateOfBirthString, formatter2);
+//        LocalDateTime actualDate = LocalDateTime.parse(elements.get(4).getText().replace(",", " "), formatter2);
+//        Assert.assertEquals(expectedDate,actualDate);
 
+        BrowserUtils.waitFor(3);
     }
 
 
@@ -225,67 +173,51 @@ public class StudentRegisterStepDefs {
 
     @And("the user fills {string} as {string}")
     public void theUserFillsAs(String field, String value) {
-
-        //1 mounh
-
-        if(value.contains("mounth forward") && field.equalsIgnoreCase("Select Date")){
-            String mounth = value.substring(0, value.indexOf("mounth") - 1);
-            int forwardMounth = Integer.parseInt(mounth);
-            value = formatter3.format(LocalDateTime.now().plusMonths(forwardMounth));
-            this.expected_select_date=value;
-            this.actual_select_date = new DatePickerPage().selectDate.getAttribute("value");
-
-
-        }else if(value.contains("mounth forward") && field.equalsIgnoreCase("Date And Time")){
-            String mounth = value.substring(0, value.indexOf("mounth") - 1);
-            int forwardMounth = Integer.parseInt(mounth);
-            value = formatter4.format(LocalDateTime.now().plusMonths(forwardMounth));
-            this.expected_date_and_time= value;
-            this.actual_date_and_time = new DatePickerPage().dateAndTime.getAttribute("value");
-
-        }
-//        System.out.println("field = " + field);
-//        System.out.println("value = " + value);
-
         new StudentRegisterPage().fillInABlank(field, value);
-
-
-
-
-
-
     }
 
 
-    @Then("the user tries below {string} options and verifies none of them is not working")
-    public void the_user_tries_below_options_and_verifies_none_of_them_is_not_working(String field, List<String> dataTable) {
+    @Then("the user tries below {string} options and verifies none of below is not working")
+    public void the_user_tries_below_options_and_verifies_none_of_below_is_not_working(String field, List<String> dataTable) throws Exception {
 
-        System.out.println("dataTable.toString() = " + dataTable.toString());
 
-        List<String> collect = dataTable.stream().peek(data -> {
-            System.out.println("*****");
+        List<String> collect = dataTable.stream().map(data -> {
+
             new StudentRegisterPage().fillInABlank(field, data);
-
-          //  BrowserUtils.clickWithJS(Driver.get().findElement(By.xpath("//button[.='Submit']")));
 
             try {
                 new StudentRegisterPage().clickButton("Submit");
-                Assert.assertFalse(new StudentRegisterPage().confirmationWindowMessage.isDisplayed());
+                Assert.assertFalse(data + " found valid, but it is invalid", new StudentRegisterPage().confirmationWindowMessage.isDisplayed());
             } catch (NoSuchElementException n) {
-                Assert.assertTrue(true);
-            }
-            //new StudentRegisterPage().clickButton("Close");
-            //BrowserUtils.waitFor(2);
 
-            return;
+            } catch (AssertionError a) {  // if any invalid email format accepted, keep going and check other emails again
+                System.out.println(data);
+
+                new StudentRegisterPage().clickButton("Close");
+                BrowserUtils.waitFor(1);
+
+                new StudentRegisterPage().fillInAForm(
+                        this.firstname,
+                        this.lastName,
+                        this.email,
+                        this.phoneNumber,
+                        this.address,
+                        this.dateOfBirthString.toString());
+
+                return data;
+            }
+            new StudentRegisterPage().checkRadioButton("Male");
+
+            return "";
 
         }).collect(Collectors.toList());
 
+        if (collect.size() > 0) {
+            throw new Exception(" !! FAIL: invalid emails are ACCEPTED: " + collect.toString());
+        }
+
 
     }
-
-
-
 
 
 }

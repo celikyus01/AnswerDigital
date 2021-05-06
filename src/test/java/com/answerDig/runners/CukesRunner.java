@@ -13,7 +13,7 @@ import org.junit.runner.RunWith;
         features = "src/test/resources/features/",
         glue = "com/answerDig/step_definitions",
         dryRun = false,
-        tags = "@register_invalid_email"
+        tags = "@all"
 
 )
 public class CukesRunner {

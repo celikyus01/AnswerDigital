@@ -78,15 +78,15 @@ public abstract class BasePage {
             if (field.equalsIgnoreCase("Select Date")) {
                 WebElement input1 = Driver.get().findElement(By.xpath("(//div[.='Select Date']/..//input)[1]"));
                 input1.click();
-                JavascriptExecutor js = (JavascriptExecutor)Driver.get();
+                JavascriptExecutor js = (JavascriptExecutor) Driver.get();
                 js.executeScript("arguments[0].value = '';", input1); //to delete keys
-                input1.sendKeys(value+Keys.ENTER);
+                input1.sendKeys(value + Keys.ENTER);
 
             } else if (field.equalsIgnoreCase("Date And Time")) {
 
                 WebElement input2 = Driver.get().findElement(By.xpath("(//div[.='Date And Time']/..//input)[2]"));
                 input2.click();
-                JavascriptExecutor js = (JavascriptExecutor)Driver.get();
+                JavascriptExecutor js = (JavascriptExecutor) Driver.get();
                 js.executeScript("arguments[0].value = '';", input2);
                 input2.sendKeys(value);
                 input2.sendKeys(Keys.ENTER);

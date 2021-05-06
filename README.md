@@ -3,8 +3,8 @@
  
 #### Prepared by:
  
-**Yusuf CELIK*
- 
+**Yusuf CELIK**
+
 *QA Test Automation Engineer*
  
   
@@ -22,9 +22,7 @@ https://www.linkedin.com/in/yusuf-celik-8a12b2208
   
  
 ##### UI Automation Testing:
- 
-  
- 
+
 `https://demoqa.com/automation-practice-form`
  
  
@@ -32,12 +30,10 @@ https://www.linkedin.com/in/yusuf-celik-8a12b2208
 
 Generating test scenarios and automation framework for Student Registration Form and completing other tasks given.
  
- 
+
  
 #### System Requirements:
- 
-  
- 
+
 - Java 1.8 + SDK
 - Selenium Webdriver
 - Maven
@@ -47,81 +43,79 @@ Generating test scenarios and automation framework for Student Registration Form
 - JUnit
  
 ## Test RUN
- 
-Notes: To run all Scenarios, use `@demoQA_001` tag in the CukesRunner class/Cucumber Options
- 
-#### [](https://github.com/musaasimobuz/ApiRestServiceTestingExercise#1-way)1. Way:
- 
-  
+
+#### https://github.com/celikyus01/AnswerDigital.git
+
  
 - Clone the projects
  
-- Import maven dependencies from POM
+- Reload maven dependencies from POM
  
-- Go **src -> test > java > com > demoQA > runners > CukesRunner** and RUN
+- Go **src -> test > java > com > answerDig > runners > CukesRunner
+
+- Specify tag (example:   tags = "@register_invalid_input_quick_check_up")
+
+        @all: runs all scenarios in  the framwork
+        @t1: runs all test cases under task 1
+        @succesful_register : fills the form with valid data and validates application allows successful registration
+        @register_invalid_email : to validate application does not accept invalid emails (scenario outline)
+        @register_invalid_input_quick_check_up  : to validate application does not accept invalid emails and names. It completes all validation in the same browser tab.
+        @t2: runs all test cases under task 2
+        @t3: runs all test cases under task 3
+        @t4: runs all test cases under task 4
+        @t5: runs all test cases under task 5
+        @t6: runs all test cases under task 6
  
+- Click run button (make sure Cukes Runner is specified as a runner source )
 - To generate "HTML Maven Cucumber Report" ;
+    > Open Maven right-side panel Double Click Project's Lifecycle Click "verify"
+
+
  
-> Open Maven right-side panel Double Click Project's Lifecycle Click "verify"
- 
- 
-#### [](https://github.com/musaasimobuz/ApiRestServiceTestingExercise#2-way)2. Way:
- 
-  
- 
-- Run from command line invoke `mvn clean verify`
- 
-  
- 
-## Cucumber Test Feature Scenarios:
-#### 1) Validate successful registration has been completed by the user.
+## Cucumber Test Feature Scenarios and BUGS found:
+#### TASK-1
 
 a- This scenario tests the registration form after filling all of the boxes within the required information taken from the user. ([https://demoqa.com/automation-practice-form](https://demoqa.com/automation-practice-form))
+
 b- To run separately this scenario, use the `@wip1` tag in the CukesRunner class/Cucumber Options
 
-## Defects Found During the Implementation
-a) Whenever the date of birth is deleted, the application gets crashed within an empty white screen appearing. 
-b) Whenever there is a selection of 3 hobbies at once, the result does not come with all of them selected. 
-c) In the mobile section, the statement of ‘10 digits’ in parentheses does not seem professional. 
+#### TASK-1 - BUGS FOUND
+
+a) Whenever the date of birth is deleted, the application gets crashed within an empty white screen appearing.
+
+b) Whenever there is a selection of 3 hobbies at once, the result might not come with all of them selected. Try at least 3-4 times.
+
+c) In the mobile section, the statement of ‘10 digits’ in parentheses does not seem professional.
+
 d) The ‘First Name & Last Name’ sections accept numbers and punctuation characters.
+
 e) Whenever there is no selection of the ‘state’, ‘city’ should be marked as disabled.
-f) The ‘Email’ box accepts invalid email addresses.
-g) There are no such data validation messages indicated as red star format indicating which boxes have to be filled and which ones not. 
- 
-#### 2) Validate alert automation activity performed by utilising test scripts, HTML and CSS locators.
- 
-a- This Scenario tests ‘Click on the second button and accept the alert’ action.
 
-b- To run separately this scenario, use the `@wip2` tag in the CukesRunner class/Cucumber Options
+f) The ‘Email’ box accepts invalid email addresses such as: email@example..com (email cannot have double dot after domain..)
 
-#### 3) Validate hover over automation activity performed by utilising test scripts, HTML and CSS locators.
- 
-a- This Scenario tests the ‘Hover over the button and input field’ action.
+g) There are no such data validation messages indicated as red star format indicating which boxes have to be filled and which ones not.
 
-b- To run separately this scenario, use the `@wip3` tag in the CukesRunner class/Cucumber Options
+h) Compulsory fields could be marked with * 
 
-#### 4) Validate drag and drop element automation activity performed by utilising test scripts, HTML and CSS locators.
- 
-a- This Scenario tests the ‘Drag and drop element into specific area’ action.
+#### TASK-2
+This Scenario tests ‘Click on the second button and accept the alert’ action.
 
-b- To run separately this scenario, use the `@wip4` tag in the CukesRunner class/Cucumber Options
+#### TASK-3
+This Scenario tests the ‘Hover over the button and input field’ action.
 
-#### 5) Validate close the small modal automation activity performed by utilising test scripts, HTML and CSS locators.
- 
-a- This Scenario tests the ‘Close the small modal’ action.
+#### TASK-4
+This Scenario tests the ‘Drag and drop element into specific area’ action.
 
-b- To run separately this scenario, use the `@wip5` tag in the CukesRunner class/Cucumber Options
-#### 6) Validate close the small modal automation activity performed by utilizing test scripts, HTML and CSS locators.
- 
-a- This Scenario tests the ‘Use the date picker to set the date to 1 month in the future’ action.
+#### TASK-5
+This Scenario tests the ‘Close the small modal’ action.
 
-b- To run separately this scenario, use the `@wip6` tag in the CukesRunner class/Cucumber Options
+#### TASK-6
+This Scenario tests the ‘Use the date picker to set the date to 1 month in the future’ action.
 
-
- ([https://demoqa.com/automation-practice-form](https://demoqa.com/automation-practice-form))
 2021 May®
- 
+
+#### https://github.com/celikyus01/AnswerDigital.git
   
-### [](https://github.com/musaasimobuz/ApiRestServiceTestingExercise#end)End
+
  
 

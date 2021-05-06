@@ -12,21 +12,22 @@ import java.util.concurrent.TimeUnit;
 
 public class Hooks {
 
-
+public static Scenario scenario;
 
     @Before
     public void setUp(){
-       // Driver.get().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        Driver.get().manage().window().maximize();
+      // Driver.get().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+       Driver.get().manage().window().maximize();
 
     }
     @After
     public void tearDown(Scenario scenario) {
+
+        this.scenario= scenario;
         if(scenario.isFailed()) {
             final byte[] screenshot = ((TakesScreenshot) Driver.get()).getScreenshotAs(OutputType.BYTES);
             scenario.attach(screenshot, "image.png", "screenshot");
         }
-        //BrowserUtils.waitFor(1);
         Driver.closeDriver();
     }
 

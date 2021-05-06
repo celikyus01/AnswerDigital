@@ -1,4 +1,4 @@
-@alert @all
+@alert @all @t2
 Feature: Alert
 
 Scenario: Accept Alert and verify alert is disappeared

@@ -1,4 +1,4 @@
-@modal @all
+@modal @all @t5
 Feature: Alert
 
   Scenario: Accept Alert and verify alert is disappeared

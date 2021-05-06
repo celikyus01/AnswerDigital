@@ -2,14 +2,11 @@ package com.answerDig.step_definitions;
 
 import com.answerDig.pages.Draggable;
 import com.answerDig.utilities.BrowserUtils;
-import com.answerDig.utilities.Driver;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
+
 
 public class DragAndDrop {
 

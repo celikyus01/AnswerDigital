@@ -1,4 +1,4 @@
-@hover @all
+@hover @all @t3
 Feature: Hover Over
 
   Scenario: Hover over web elements and see messages is present
